@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic.Devices;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace HW9_TheMazeGame
 {
@@ -21,8 +22,12 @@ namespace HW9_TheMazeGame
 
             Load += (s, e) =>
             {
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+                MaximizeBox = false;
+
                 Paint += GameForm_Paint;
                 KeyDown += GameForm_KeyDown;
+
                 DoubleBuffered = true;
             };
 
@@ -56,7 +61,7 @@ namespace HW9_TheMazeGame
                     playerPosX = x; playerPosY = y;
                     Invalidate();
 
-                    if (playerPosX == cols - 1 || playerPosY == rows - 1)
+                    if (playerPosX == cols - 1 || playerPosY == rows - 1 || playerPosX == 0 || playerPosY == 0)
                     {
                         MessageBox.Show("Yeah boy! Big Run bro!");
                         Close();
