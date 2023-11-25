@@ -58,7 +58,7 @@ namespace HW9_TheMazeGame
 
                     if (playerPosX == cols - 1 || playerPosY == rows - 1)
                     {
-                        MessageBox.Show("Yeah boy!");
+                        MessageBox.Show("Yeah boy! Big Run bro!");
                         Close();
                     }
                 }
