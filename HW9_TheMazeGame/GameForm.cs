@@ -30,43 +30,38 @@ namespace HW9_TheMazeGame
         }
         private void GameForm_KeyDown(object? sender, KeyEventArgs e)
         {
-            int x = playerPosX;
-            int y = playerPosY;
+            int x = playerPosX, y = playerPosY;
 
-            switch (e.KeyCode)
+            if (e.KeyCode == Keys.Up)
             {
-                case Keys.Up:
-                    {
-                        y = Math.Max(0, playerPosY - 1);
-                        break;
-                    }
-                case Keys.Down:
-                    {
-                        y = Math.Min(rows - 1, playerPosY + 1);
-                        break;
-                    }
-                case Keys.Left:
-                    {
-                        x = Math.Max(0, playerPosX - 1);
-                        break;
-                    }
-                case Keys.Right:
-                    {
-                        x = Math.Min(rows - 1, playerPosX + 1);
-                        break;
-                    }
+                y = playerPosY - 1;
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                y = playerPosY + 1;
+            }
+            else if (e.KeyCode == Keys.Left)
+            {
+                x = playerPosX - 1;
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                x = playerPosX + 1;
             }
 
-            if (map2d[y, x] == 0)
+            if (x != playerPosX || y != playerPosY)
             {
-                playerPosX = x;
-                playerPosY = y;
-                Invalidate();
-            }
-            if (playerPosX == map2d.GetLength(1) - 1 || playerPosY == map2d.GetLength(0) - 1)
-            {
-                MessageBox.Show("Yeah boy!");
-                this.Close();
+                if (x < cols && y < rows && map2d[y, x] == 0)
+                {
+                    playerPosX = x; playerPosY = y;
+                    Invalidate();
+
+                    if (playerPosX == cols - 1 || playerPosY == rows - 1)
+                    {
+                        MessageBox.Show("Yeah boy!");
+                        Close();
+                    }
+                }
             }
         }
         private void GameForm_Paint(object? sender, PaintEventArgs e)
@@ -85,6 +80,5 @@ namespace HW9_TheMazeGame
             }
             g.FillEllipse(Brushes.Crimson, playerPosX * rows, playerPosY * cols, rows, cols);
         }
-
     }
 }
